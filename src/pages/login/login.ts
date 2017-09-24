@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LoginModel } from "../../models/loginModel";
 import { HomePage } from "../home/home";
+import { ContactUsPage } from '../contact-us/contact-us';
+import { UsersPage } from '../users/users';
 
 /**
  * Generated class for the LoginPage page.
@@ -14,6 +16,7 @@ import { HomePage } from "../home/home";
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+  
 })
 export class LoginPage {
 loginModel:LoginModel=new LoginModel();
@@ -25,6 +28,6 @@ loginModel:LoginModel=new LoginModel();
   }
 doLogin(){
  //console.log(this.loginModel.name + this.loginModel.password);
- this.navCtrl.setRoot(HomePage);
+ this.navCtrl.setRoot(UsersPage);
 }
 }
