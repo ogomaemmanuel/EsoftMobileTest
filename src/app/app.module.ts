@@ -12,6 +12,7 @@ import { UserProvider } from '../providers/user/user';
 import { UsersPage } from '../pages/users/users';
 import { HTTP } from '@ionic-native/http';
 import { HttpModule } from '@angular/http';
+import { UserDetailsServiceProvider } from '../providers/user-details-service/user-details-service';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { HttpModule } from '@angular/http';
     SplashScreen,
     HTTP,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserProvider
+    UserProvider,
+    UserDetailsServiceProvider
   ]
 })
 export class AppModule {}
