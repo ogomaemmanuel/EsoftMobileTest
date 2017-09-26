@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { User } from '../../models/userModel';
 import { UserProvider } from '../../providers/user/user';
 import 'rxjs/add/operator/map';
+import { Storage } from '@ionic/storage';
+import { Http } from '@angular/http';
 
 /**
  * Generated class for the UsersPage page.
@@ -18,13 +20,13 @@ import 'rxjs/add/operator/map';
   providers: [UserProvider]
 })
 export class UsersPage implements OnInit {
-  private users: User[] = [];
-  constructor(public loadingCtrl: LoadingController, public userProvider: UserProvider, public navCtrl: NavController, public navParams: NavParams) {
-
+  private users: any = {};
+  constructor(public http: Http, public loadingCtrl: LoadingController, public userProvider: UserProvider, public navCtrl: NavController, public navParams: NavParams) {
+    this.users.title = "ffff"
 
   }
   ngOnInit(): void {
-    this.getUsers();
+    this.getSingleUser();
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad UsersPage');
@@ -34,12 +36,23 @@ export class UsersPage implements OnInit {
       content: "Please wait...",
 
     });
-    this.userProvider.getUsers().subscribe(data => {
+    this.userProvider.getSingeUserUsingStoredId().then(data => {
       loader.dismiss();
-      this.users = data;
+
+      this.users = Promise.resolve(data);
+      console.log(this.users) //= data;
     })
     loader.present();
 
+  }
+  private getSingleUser() {
+    this.userProvider.getUsername().then(result=>{
+      this.http.get("https://jsonplaceholder.typicode.com/posts/" + Number(result)).map(resp => resp.json()).subscribe(data => {
+        console.log(data);
+        this.users = data;
+      });
+    })
+   
   }
 
 }

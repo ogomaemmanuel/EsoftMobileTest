@@ -13,6 +13,7 @@ import { UsersPage } from '../pages/users/users';
 import { HTTP } from '@ionic-native/http';
 import { HttpModule } from '@angular/http';
 import { UserDetailsServiceProvider } from '../providers/user-details-service/user-details-service';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { UserDetailsServiceProvider } from '../providers/user-details-service/us
   ],
   imports: [
     BrowserModule,
+    IonicStorageModule.forRoot(),
     HttpModule,
     IonicModule.forRoot(MyApp)
   ],
